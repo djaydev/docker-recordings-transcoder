@@ -31,7 +31,7 @@ Where:
 - `UMASK`: Mask that controls how file permissions are set for newly created files.
 
 - ENCODER=intel  
-This options runs a script to convert the .ts video using ffmpeg with vaapi hardware acceleration enabled. It requires `--device /dev/dri:/dev/dri` (and write permissions given to PUID user) to access the intel GPU in the docker container. Tries to convert any codec to h265 except AVC/h264. Recordings that are AVC/h264 are only converted to .mp4 files. The reason is because these recordings are compressed enough that vaapi hw transcoding produced larger files sizes, or very bad video quality. Don't agree? Then please use "software" or your own script, see the custom section below.
+This options runs a script to convert the .ts video using ffmpeg with vaapi hardware acceleration enabled. It requires `--device /dev/dri:/dev/dri` (and write permissions on said /dev/dri given to PUID user) to access the intel GPU in the docker container. Tries to convert any codec to h265 .mp4 files. If you have any issues with AVC/h264 recordings and Intel, please open an issue with the postProcess log and in the meantime switch to ENCODER=software temporarily.
 
 - ENCODER=nvidia  
 This options runs a script to convert the .ts video using ffmpeg with Nvidia nvenc hardware acceleration enabled. It requires `--runtime=nvidia` and `-e NVIDIA_DRIVER_CAPABILITIES=all` to access the Nvidia GPU in the docker container. Tries to convert any codec to h265 .mp4 files.  If you have any issues with AVC/h264 recordings and Nvidia, please open an issue with the postProcess log and in the meantime switch to ENCODER=software temporarily.
