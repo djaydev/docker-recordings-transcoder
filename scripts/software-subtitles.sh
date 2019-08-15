@@ -9,10 +9,6 @@ mp4="${mkv%.*}.mp4"
 mp4="$(basename $mp4)"
 srt="${mkv%.*}.srt"
 srt="$(basename $srt)"
-xml="${mkv%.*}.xml"
-xml="$(basename $xml)"
-d="${mkv%.*}.d"
-d="$(basename $d)"
 exec 3>&1 1>>${LogFile} 2>&1
 ccextractor "$1" -o "$map/$srt"
 if [ -f "$map/$srt" ] && [[ $(find "$map/$srt" -type f -size +500c 2>/dev/null) ]] ; then
