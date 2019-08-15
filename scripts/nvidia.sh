@@ -21,8 +21,5 @@ fi
 if [ $codec_name != "AVC" ] && [ $codec_name != "MPEG-2V" ] ; then
 ffmpeg -hwaccel nvdec -i "$1" -c:v hevc_nvenc -preset:v hp -level:v 5.0 -rc:v vbr_hq -rc-lookahead:v 32 -brand mp42 -ac 2 -c:a libfdk_aac -b:a 192k "$map/$mp4"
 fi
-if [ -f "$map/$srt" ] ; then
-rm "$map/$srt"
-fi
 rm "$1".txt
 #SEDIF

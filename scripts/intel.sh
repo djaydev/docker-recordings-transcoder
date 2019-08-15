@@ -16,8 +16,5 @@ if [ $codec_name = "AVC" ] ; then
 ffmpeg -i "$1" -c:v copy -ac 2 -c:a libfdk_aac -b:a 192k "$map/$mp4"
 else ffmpeg -hwaccel vaapi -vaapi_device /dev/dri/renderD128 -i "$1" -vf 'format=nv12|vaapi,hwupload,deinterlace_vaapi' -c:v hevc_vaapi -brand mp42 -ac 2 -c:a libfdk_aac -b:a 192k "$map/$mp4"
 fi
-if [ -f "$map/$srt" ] ; then
-rm "$map/$srt"
-fi
 rm "$1".txt
 #SEDIF
