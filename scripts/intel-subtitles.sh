@@ -21,7 +21,7 @@ ffmpeg -i "$1" -c:v copy -ac 2 -c:a libfdk_aac -b:a 192k "$map/$mp4"
 else ccextractor "$1" -o "$map/$srt"
 fi
 if [ $codec_name != "AVC" ] ; then
-if [ -f "$map/$srt" ] && [[ $(find "$map/$srt" -type f -size +200c 2>/dev/null) ]] ; then
+if [ -f "$map/$srt" ] && [[ $(find "$map/$srt" -type f -size +1500c 2>/dev/null) ]] ; then
 ffmpeg -hwaccel vaapi -vaapi_device /dev/dri/renderD128 -i "$1" -i "$map/$srt" -vf 'format=nv12|vaapi,hwupload,deinterlace_vaapi' -c:v hevc_vaapi -brand mp42 -ac 2 -c:a libfdk_aac -b:a 192k -c:s mov_text "$map/$mp4"
 else echo "*** CCextractor couldn't find Closed Captions. No Subtitles will be added...***"
 ffmpeg -hwaccel vaapi -vaapi_device /dev/dri/renderD128 -i "$1" -vf 'format=nv12|vaapi,hwupload,deinterlace_vaapi' -c:v hevc_vaapi -brand mp42 -ac 2 -c:a libfdk_aac -b:a 192k "$map/$mp4"
