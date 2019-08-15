@@ -5,7 +5,7 @@ RUN apt update && \
 apt install --no-install-recommends \
     coreutils findutils expect tcl8.6 \
     mediainfo libfreetype6 libc6 libutf8proc2 \
-    libtesseract4 libpng16-16 liblept5 libva2 \
+    tesseract-ocr libpng16-16 liblept5 libva2 \
     libva-drm2 i965-va-driver expat libgomp1 \
     libxcb1 libxcb-shape0 -y && \
 # cleanup

@@ -9,6 +9,10 @@ mp4="${mkv%.*}.mp4"
 mp4="$(basename $mp4)"
 srt="${mkv%.*}.srt"
 srt="$(basename $srt)"
+xml="${mkv%.*}.xml"
+xml="$(basename $xml)"
+d="${mkv%.*}.d"
+d="$(basename $d)"
 exec 3>&1 1>>${LogFile} 2>&1
 mediainfo --Inform="Video;codec_name=%Codec%" "$1" >> "$1".txt
 source "$1".txt
@@ -25,6 +29,12 @@ fi
 fi
 if [ -f "$map/$srt" ] ; then
 rm "$map/$srt"
+fi
+if [ -f "$map/$xml" ] ; then
+rm "$map/$xml"
+fi
+if [ -d "$map/$d" ] ; then
+rm -r "$map/$d"
 fi
 rm "$1".txt
 #SEDIF
