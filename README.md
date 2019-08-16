@@ -24,7 +24,7 @@ Where:
 - `/docker/appdata/recordings-converter`: This is where the application stores its configuration, log and any files needing persistency.  Location to add a custom script for video conversion named custom.sh
 - `/home/user/videos`: This location contains .ts files that need converting.  
 - `ENCODER`: options are "intel" "nvidia" "software" "custom" explained below
-- `SUBTITLES`: Include subtitles from the original .ts, 0 = no, 1 = yes. **DVB recordings that have subtitles set to yes will get mkv files instead of mp4. The mp4 container does not support DVB subtitles.**
+- `SUBTITLES`: Include subtitles from the original .ts, 0 = no, 1 = yes. **If converting DVB recordings please see [below](https://github.com/djaydev/docker-recordings-transcoder#DVB-Subtitles-and-Subtitles)**
 - `DELETE_TS`: After converting remove the original .ts recording file. 0 = no, 1 = yes. **USE DELETE_TS=0 UNTIL YOU'RE SURE IT WORKS WITH YOUR VIDEO RECORDINGS.**
 - `PUID`: ID of the user the application runs as.
 - `PGID`: ID of the group the application runs as.
@@ -42,6 +42,10 @@ Tries to convert any codec to h265 .mp4 files.
 
 - ENCODER=custom  
 This option runs your script to convert the .ts video using ffmpeg however you choose. With this option please include your script named "custom.sh" in the mapped /config folder.  
+
+## DVB Recordings and Subtitles
+
+If your Live TV recordings are from DVB channels and you set subtitles to 1=yes, the recordings will be converted to h265 with the DVB subtitles included, but the container will be .mkv instead of .mp4. This is the only condition where mkv is used, and it's because mp4 does not support DVB subtitles.  One benefit of this is mkv will produce a slightly smaller file size than mp4 at the same quality.  If you prefer to have all mp4 files then switch subtitles to 0 and possibly utilize an external subtitle source such as [Caption](https://getcaption.co/).
 
 ## Unraid Users
 
