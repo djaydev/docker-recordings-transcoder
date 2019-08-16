@@ -11,6 +11,7 @@ mkv="${ts%.*}.mkv"
 mkv="$(basename $mkv)"
 srt="${ts%.*}.srt"
 srt="$(basename $srt)"
+exec 3>&1 1>>${LogFile} 2>&1
 mediainfo --Inform="Video;codec_name=%Codec%" "$1" >> "$1".txt
 mediainfo --Inform="Text;subs="%Format%"" "$1" | head -c 8 >> "$1".txt
 source "$1".txt

@@ -34,7 +34,7 @@ Where:
 This options runs a script to convert the .ts video using ffmpeg with vaapi hardware acceleration enabled. It requires `--device /dev/dri:/dev/dri` (and write permissions on said /dev/dri given to PUID user) to access the intel GPU in the docker container. Tries to convert any codec to h265 .mp4 files. If you have any issues with AVC/h264 recordings and Intel, please open an issue with the postProcess log and in the meantime switch to ENCODER=software temporarily.
 
 - ENCODER=nvidia  
-This options runs a script to convert the .ts video using ffmpeg with Nvidia nvenc hardware acceleration enabled. It requires `--runtime=nvidia` and `-e NVIDIA_DRIVER_CAPABILITIES=all` to access the Nvidia GPU in the docker container. Tries to convert any codec to h265 .mp4 files.  If you have any issues with AVC/h264 recordings and Nvidia, please open an issue with the postProcess log and in the meantime switch to ENCODER=software temporarily.
+This options runs a script to convert the .ts video using ffmpeg with Nvidia nvenc hardware acceleration enabled. It requires `--runtime=nvidia` and `-e NVIDIA_DRIVER_CAPABILITIES=all` to access the Nvidia GPU in the docker container. Tries to convert any codec to h265 .mp4 files. If you have any issues with AVC/h264 recordings and Nvidia, please open an issue with the postProcess log and in the meantime switch to ENCODER=software temporarily.
 
 - ENCODER=software  
 This options runs a script to convert the .ts video using ffmpeg with software encoding enabled. Very CPU intensive but results in the best file size to video quality ratio.
