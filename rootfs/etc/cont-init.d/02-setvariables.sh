@@ -9,7 +9,12 @@ if [ ${ENCODER} = "software" ] ; then
 ENCODER_SCRIPT=software
 fi
 if [ ${ENCODER} = "custom" ] ; then
-sed -i "s/scripts\/ENCODEREND/config\/custom.sh/g" /etc/services.d/autovideoconverter/run
+    if [ -f "/config/custom.sh" ] ; then
+        chmod +x /config/custom.sh
+        sed -i "s/scripts\/ENCODEREND/config\/custom.sh/g" /etc/services.d/autovideoconverter/run
+        sed -i "s/ENCODEREND/custom.sh/g" /etc/services.d/autovideoconverter/run
+    else echo "ERROR: Please save the custom script to /config/custom.sh"
+    fi
 fi
 if [ ${SUBTITLES} = "0" ] ; then
 ENCODER_SCRIPT_END=.sh

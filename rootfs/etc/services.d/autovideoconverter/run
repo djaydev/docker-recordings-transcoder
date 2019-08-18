@@ -244,7 +244,7 @@ process_video() {
 
     NUM_PROCESSED_FILES="$(expr $NUM_PROCESSED_FILES + 1)"
 videodir="$(dirname "$video")"
-    if [ -f "$videodir/$basename.$AC_FORMAT" ] && [ -s "$videodir/$basename.$AC_FORMAT" ]; then
+    if [ -f "$videodir/$basename.$AC_FORMAT" ] || [ -f "$videodir/$basename.mkv" ] && [ -s "$videodir/$basename.$AC_FORMAT" ] || [ -s "$videodir/$basename.mkv" ]; then
         log "Conversion ended successfully."
         echo "$video $hash" >> "$SUCCESSFUL_CONVERSIONS"
         if [ "$AC_KEEP_SOURCE" -eq 0 ]; then
