@@ -24,7 +24,7 @@ RUN apt update && \
     rm -rf /tmp/* /var/lib/apt/lists/*
 
 # Copy ccextractor
-COPY --from=djaydev/ccextractor:latest /usr/local/bin /usr/local/bin
+COPY --from=djaydev/ccextractor /usr/local/bin /usr/local/bin
 # Copy ffmpeg
 COPY --from=djaydev/ffmpeg /usr/local/ /usr/local/
 
