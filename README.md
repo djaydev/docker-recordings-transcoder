@@ -31,7 +31,7 @@ Where:
 - `UMASK`: Mask that controls how file permissions are set for newly created files.
 
 - ENCODER=intel  
-This options runs a script to convert the .ts video using ffmpeg with vaapi hardware acceleration enabled. It requires `--device /dev/dri:/dev/dri` (and write permissions on said /dev/dri given to PUID user) to access the intel GPU in the docker container. Tries to convert any codec to h265 .mp4 files. If you have any issues with AVC/h264 recordings and Intel, please open an issue with the postProcess log and in the meantime switch to ENCODER=software temporarily.
+This options runs a script to convert the .ts video using ffmpeg with vaapi hardware acceleration enabled. It requires `--device /dev/dri:/dev/dri` (and permissions on /dev/dri given to PUID user) to access the intel GPU in the docker container. Tries to convert any codec to h265 .mp4 files. If you have any issues with AVC/h264 recordings and Intel, please open an issue with the postProcess log and in the meantime switch to ENCODER=software temporarily.
 
 - ENCODER=nvidia  
 This options runs a script to convert the .ts video using ffmpeg with Nvidia nvenc hardware acceleration enabled. It requires `--runtime=nvidia` and `-e NVIDIA_DRIVER_CAPABILITIES=all` to access the Nvidia GPU in the docker container. Tries to convert any codec to h265 .mp4 files. If you have any issues with AVC/h264 recordings and Nvidia, please open an issue with the postProcess log and in the meantime switch to ENCODER=software temporarily.
@@ -45,7 +45,7 @@ This option runs your script to convert the .ts video using ffmpeg however you c
 
 ## DVB Recordings and Subtitles
 
-If your Live TV recordings are from DVB channels and you set subtitles to 1=yes, the recordings will be converted to h265 with the DVB subtitles included, but the container will be .mkv instead of .mp4. This is the only condition where mkv is used, and it's because mp4 does not support DVB subtitles.  One benefit of this is mkv will produce a slightly smaller file size than mp4 at the same quality.  If you prefer to have all mp4 files then switch subtitles to 0 and possibly utilize an external subtitle source such as [Caption](https://getcaption.co/).
+If your Live TV recordings are from DVB channels and you set subtitles to 1=yes, the recordings will be converted to h265 with the DVB subtitles included, but the container will be .mkv instead of .mp4. This is the only condition where mkv is used, and it's because mp4 does not support DVB subtitles.  One benefit of this is mkv will produce a slightly smaller file size than mp4 at the same quality.  If you prefer to have all mp4 files then switch subtitles to 0 and possibly utilize an external subtitle source such as [Caption](https://getcaption.co/) or [Bazarr](https://www.bazarr.media/).
 
 ## Unraid Users
 
