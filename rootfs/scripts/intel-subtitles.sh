@@ -16,12 +16,12 @@ mediainfo --Inform="Text;subs=%Format%\n" "$1" | head -c 8 >> "$1".txt
 source "$1".txt
 ccextractor "$1" -o "$map/$srt"
 if [ $subs = "DVB" ] ; then
-    ffmpeg -hwaccel vaapi -vaapi_device /dev/dri/renderD128 -i "$1" -vf 'format=nv12|vaapi,hwupload,deinterlace_vaapi' -c:v hevc_vaapi -brand mp42 -ac 2 -c:a libfdk_aac -b:a 192k -c:s copy "$map/$mkv"
+    ffmpeg -hwaccel vaapi -vaapi_device /dev/dri/renderD128 -i "$1" -vf 'format=nv12|vaapi,hwupload,deinterlace_vaapi' -c:v hevc_vaapi -brand mp42 -ac 2 -c:a libfdk_aac -b:a 128k -c:s copy "$map/$mkv"
 else
     if [ -f "$map/$srt" ] && [[ $(find "$map/$srt" -type f -size +500c 2>/dev/null) ]] ; then
-        ffmpeg -hwaccel vaapi -vaapi_device /dev/dri/renderD128 -i "$1" -i "$map/$srt" -vf 'format=nv12|vaapi,hwupload,deinterlace_vaapi' -c:v hevc_vaapi -brand mp42 -ac 2 -c:a libfdk_aac -b:a 192k -c:s mov_text "$map/$mp4"
+        ffmpeg -hwaccel vaapi -vaapi_device /dev/dri/renderD128 -i "$1" -i "$map/$srt" -vf 'format=nv12|vaapi,hwupload,deinterlace_vaapi' -c:v hevc_vaapi -brand mp42 -ac 2 -c:a libfdk_aac -b:a 128k -c:s mov_text "$map/$mp4"
     else echo "*** CCextractor couldn't find Closed Captions. No Subtitles will be added...***"
-        ffmpeg -hwaccel vaapi -vaapi_device /dev/dri/renderD128 -i "$1" -vf 'format=nv12|vaapi,hwupload,deinterlace_vaapi' -c:v hevc_vaapi -brand mp42 -ac 2 -c:a libfdk_aac -b:a 192k "$map/$mp4"
+        ffmpeg -hwaccel vaapi -vaapi_device /dev/dri/renderD128 -i "$1" -vf 'format=nv12|vaapi,hwupload,deinterlace_vaapi' -c:v hevc_vaapi -brand mp42 -ac 2 -c:a libfdk_aac -b:a 128k "$map/$mp4"
     fi
 fi
 if [ -f "$map/$srt" ] ; then
