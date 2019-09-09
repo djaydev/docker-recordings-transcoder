@@ -13,7 +13,6 @@ RUN apt update && \
       libxcb-shape0 libssl1.1 wget -y && \
     wget --no-check-certificate -O s6-overlay.tar.gz https://github.com/just-containers/s6-overlay/releases/download/v1.22.1.0/s6-overlay-amd64.tar.gz && \
     tar xzf s6-overlay.tar.gz -C / && \
-    wget --no-check-certificate -O /etc/cont-init.d/50-gid-video https://raw.githubusercontent.com/linuxserver/docker-plex/master/root/etc/cont-init.d/50-gid-video  && \
     useradd -u 911 -U -d /config -s /bin/false abc && \
     usermod -G users abc && \
     mkdir /config && \
