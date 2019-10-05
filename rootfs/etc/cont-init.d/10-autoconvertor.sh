@@ -4,7 +4,7 @@ set -e # Exit immediately if a command exits with a non-zero status.
 set -u # Treat unset variables as an error.
 USER_ID=SEDUSER
 GROUP_ID=SEDGROUP
-UMASK=SEDUMASK
+
 log() {
     echo "[cont-init.d] $(basename $0): $*"
 }

@@ -28,8 +28,6 @@ sed -i "s/ENCODER/$ENCODER_SCRIPT/g" /etc/services.d/autovideoconverter/run
 sed -i "s/END/$ENCODER_SCRIPT_END/g" /etc/services.d/autovideoconverter/run
 sed -i "s/SEDUSER/$PUID/g" /etc/cont-init.d/10-autoconvertor.sh
 sed -i "s/SEDGROUP/$PGID/g" /etc/cont-init.d/10-autoconvertor.sh
-sed -i "s/SEDUMASK/$UMASK/g" /etc/cont-init.d/10-autoconvertor.sh
 sed -i "s/SEDUSER/$PUID/g" /etc/services.d/autovideoconverter/run
 sed -i "s/SEDGROUP/$PGID/g" /etc/services.d/autovideoconverter/run
-sed -i "s/SEDUMASK/$UMASK/g" /etc/services.d/autovideoconverter/run
 mkdir /output

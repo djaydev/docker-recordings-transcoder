@@ -3,7 +3,7 @@
 set -u # Treat unset variables as an error.
 USER_ID=SEDUSER
 GROUP_ID=SEDGROUP
-UMASK=SEDUMASK
+
 if [ -e /dev/dri ]; then
     SUP_GROUP_IDS=$(stat -c '%g' /dev/dri/* | grep -v '^0$' | head -n 1)
 fi
