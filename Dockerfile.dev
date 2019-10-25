@@ -17,9 +17,6 @@ RUN apt update && \
     usermod -G users abc && \
     mkdir /config && \
 # cleanup
-    apt-get remove wget -y && \
-    apt-get autoremove -y && \
-    apt-get clean && \
     rm -rf /tmp/* /var/lib/apt/lists/*
 
 # Copy ccextractor
