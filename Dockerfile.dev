@@ -15,13 +15,9 @@ RUN apt update && \
     usermod -G users abc && \
     mkdir /config && \
 # cleanup
-<<<<<<< HEAD
     apt-get autoremove -y && \
     apt-get clean -y
     rm -rf /tmp/* /var/lib/apt/lists/*
-=======
-    rm -rf /tmp/* /var/lib/apt/lists/
->>>>>>> 72d5c5abc56df6c281e85c7e0b86497d9ed13af1
 
 # Copy ccextractor
 COPY --from=djaydev/ccextractor:dev /usr/local/bin /usr/local/bin
