@@ -23,6 +23,9 @@ fi
 if [ ${DELETE_TS} = "1" ] ; then
 sed -i "s/#SEDIF/if [ -f \"\$map\/\$mp4\" ] \&\& [ -s \"\$map\/\$mp4\" ] ; then\nrm \"\$1\"\nfi/g" /scripts/$ENCODER_SCRIPT$ENCODER_SCRIPT_END
 fi
+if [ ! -f /bin/sh ]; then
+    ln -s /usr/bin/dash /bin/sh && ln -s /usr/bin/bash /bin/bash
+fi
 chmod +x /scripts/*
 sed -i "s/ENCODER/$ENCODER_SCRIPT/g" /etc/services.d/autovideoconverter/run
 sed -i "s/END/$ENCODER_SCRIPT_END/g" /etc/services.d/autovideoconverter/run
