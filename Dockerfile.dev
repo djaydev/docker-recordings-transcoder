@@ -17,7 +17,7 @@ RUN apt update && \
     usermod -G users abc && \
     mkdir /config && \
 # cleanup
-    rm -rf /tmp/* /var/lib/apt/lists/*
+    rm -rf /tmp/* /var/lib/apt/lists/
 
 # Copy ccextractor
 COPY --from=djaydev/ccextractor:dev /usr/local/bin /usr/local/bin
@@ -26,6 +26,8 @@ COPY --from=djaydev/ffmpeg:dev /usr/local/ /usr/local/
 
 # Copy the start scripts.
 COPY rootfs/ /
+
+RUN ln -s /usr/bin/dash /bin/sh && ln -s /usr/bin/bash /bin/bash
 
 ENV ENCODER=software \
     SUBTITLES=1 \
