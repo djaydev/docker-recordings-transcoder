@@ -5,7 +5,7 @@ USER_ID=SEDUSER
 GROUP_ID=SEDGROUP
 
 if [ -e /dev/dri ]; then
-    SUP_GROUP_IDS=$(stat -c '%g' /dev/dri/* | grep -v '^0$' | head -n 1)
+    SUP_GROUP_IDS=$(stat -c '%g' /dev/dri/render* | grep -v '^0$' | head -n 1)
 fi
 
 # Make sure we appear with a proper name under `ps`.
