@@ -16,7 +16,7 @@ RUN apt update && \
     mkdir /config && \
 # cleanup
     apt-get autoremove -y && \
-    apt-get clean -y
+    apt-get clean -y && \
     rm -rf /tmp/* /var/lib/apt/lists/*
 
 # Copy ccextractor
