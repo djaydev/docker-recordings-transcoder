@@ -29,8 +29,6 @@ COPY --from=djaydev/baseimage-s6overlay:amd64 /tmp/ /
 # Copy the start scripts.
 COPY rootfs/ /
 
-RUN ln -s /usr/bin/dash /bin/sh && ln -s /usr/bin/bash /bin/bash
-
 ENV ENCODER=software \
     SUBTITLES=1 \
     DELETE_TS=0 \
