@@ -1,6 +1,6 @@
 # djaydev/recordings-converter
 
-FROM ubuntu:18.04
+FROM ubuntu:19.10
 
 WORKDIR /tmp
 
@@ -10,22 +10,21 @@ RUN apt update && \
       mediainfo libfreetype6 libutf8proc2 \
       libtesseract4 libpng16-16 expat \
       libva-drm2 i965-va-driver \
-      libxcb-shape0 libssl1.1 wget -y && \
-    wget --no-check-certificate -O s6-overlay.tar.gz https://github.com/just-containers/s6-overlay/releases/download/v1.22.1.0/s6-overlay-amd64.tar.gz && \
-    tar xzf s6-overlay.tar.gz -C / && \
+      libxcb-shape0 libssl1.1 -y && \
     useradd -u 911 -U -d /config -s /bin/false abc && \
     usermod -G users abc && \
     mkdir /config && \
 # cleanup
-    apt-get remove wget -y && \
-    apt-get autoremove -y && \
-    apt-get clean && \
+    apt autoremove -y && \
+    apt clean -y && \
     rm -rf /tmp/* /var/lib/apt/lists/*
 
 # Copy ccextractor
-COPY --from=djaydev/ccextractor /usr/local/bin /usr/local/bin
+COPY --from=djaydev/ccextractor:dev /usr/local/bin /usr/local/bin
 # Copy ffmpeg
-COPY --from=djaydev/ffmpeg /usr/local/ /usr/local/
+COPY --from=djaydev/ffmpeg:dev /usr/local/ /usr/local/
+# Copy S6-Overlay
+COPY --from=djaydev/baseimage-s6overlay:amd64 /tmp/ /
 
 # Copy the start scripts.
 COPY rootfs/ /
