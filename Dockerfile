@@ -7,8 +7,7 @@ WORKDIR /tmp
 RUN apt update && \
     apt install --no-install-recommends \
       coreutils findutils expect tcl8.6 \
-      mediainfo libfreetype6 libutf8proc2 \
-      libtesseract4 libpng16-16 expat \
+      mediainfo ccextractor expat \
       libva-drm2 i965-va-driver \
       libxcb-shape0 libssl1.1 -y && \
     useradd -u 911 -U -d /config -s /bin/false abc && \
@@ -19,8 +18,6 @@ RUN apt update && \
     apt clean -y && \
     rm -rf /tmp/* /var/lib/apt/lists/*
 
-# Copy ccextractor
-COPY --from=djaydev/ccextractor /usr/local/bin /usr/local/bin
 # Copy ffmpeg
 COPY --from=djaydev/ffmpeg /usr/local/ /usr/local/
 # Copy S6-Overlay
