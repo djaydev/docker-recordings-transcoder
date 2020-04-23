@@ -1,11 +1,11 @@
 # djaydev/recordings-converter
 
-FROM ubuntu:19.10
+FROM ubuntu:20.04
 
 WORKDIR /tmp
 
 RUN apt update && \
-    apt install --no-install-recommends \
+    DEBIAN_FRONTEND=noninteractive apt install --no-install-recommends \
       coreutils findutils expect tcl8.6 \
       mediainfo libfreetype6 libutf8proc2 \
       libtesseract4 libpng16-16 expat \
@@ -20,9 +20,9 @@ RUN apt update && \
     rm -rf /tmp/* /var/lib/apt/lists/*
 
 # Copy ccextractor
-COPY --from=djaydev/ccextractor /usr/local/bin /usr/local/bin
+COPY --from=djaydev/ccextractor:dev /usr/local/bin /usr/local/bin
 # Copy ffmpeg
-COPY --from=djaydev/ffmpeg /usr/local/ /usr/local/
+COPY --from=djaydev/ffmpeg:dev /usr/local/ /usr/local/
 # Copy S6-Overlay
 COPY --from=djaydev/baseimage-s6overlay:amd64 /tmp/ /
 # Copy script for Intel iGPU permissions
