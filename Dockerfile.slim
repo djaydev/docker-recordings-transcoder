@@ -1,0 +1,37 @@
+# djaydev/recordings-converter
+
+FROM alpine:3.12
+
+WORKDIR /tmp
+
+RUN apk add coreutils findutils expect tcl8.6 \
+      bash mediainfo freetype utf8proc \
+      tesseract-ocr libpng expat ffmpeg \
+      libva-intel-driver libva shadow && \
+    useradd -u 911 -U -d /config -s /bin/false abc && \
+    usermod -G users abc && \
+    mkdir /config && \
+# cleanup
+    rm -rf /var/cache/apk/* /tmp/* /tmp/.[!.]*
+
+# Copy ccextractor
+COPY --from=djaydev/ccextractor:slim /usr/local/bin /usr/local/bin
+# Copy S6-Overlay
+COPY --from=djaydev/baseimage-s6overlay:amd64 /tmp/ /
+# Copy script for Intel iGPU permissions
+COPY --from=linuxserver/plex /etc/cont-init.d/50-gid-video /etc/cont-init.d/50-gid-video
+
+# Copy the start scripts.
+COPY rootfs/ /
+
+ENV ENCODER=software \
+    SUBTITLES=1 \
+    DELETE_TS=0 \
+    PUID=99 \
+    PGID=100 \
+    UMASK=000 \
+    AUTOMATED_CONVERSION_FORMAT="mp4" \
+    NVIDIA_VISIBLE_DEVICES=all \
+    NVIDIA_DRIVER_CAPABILITIES=all
+
+ENTRYPOINT ["/init"]
