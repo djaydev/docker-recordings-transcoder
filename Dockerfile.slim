@@ -4,7 +4,7 @@ FROM alpine:3.12
 
 WORKDIR /tmp
 
-RUN apk add coreutils findutils expect tcl8.6 \
+RUN apk add coreutils findutils expect tcl \
       bash mediainfo freetype utf8proc \
       tesseract-ocr libpng expat ffmpeg \
       libva-intel-driver libva shadow && \
