@@ -13,7 +13,7 @@ RUN apt update && \
       libxcb-shape0 libssl1.1 -y && \
     useradd -u 911 -U -d /config -s /bin/false abc && \
     usermod -G users abc && \
-    mkdir /config && \
+    mkdir /config /output && \
 # cleanup
     apt autoremove -y && \
     apt clean -y && \
