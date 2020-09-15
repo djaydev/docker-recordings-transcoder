@@ -20,6 +20,7 @@ COPY --from=linuxserver/plex /etc/cont-init.d/50-gid-video /etc/cont-init.d/50-g
 
 # Copy the start scripts.
 COPY rootfs/ /
+RUN sed -i "s/libfdk_aac/aac/g" /scripts/*.sh
 
 ENV ENCODER=software \
     SUBTITLES=1 \
