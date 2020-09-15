@@ -1,0 +1,34 @@
+# djaydev/recordings-converter
+
+FROM alpine:edge
+
+WORKDIR /tmp
+
+RUN apk --no-cache add  \
+      bash coreutils findutils expect \
+      expat libressl3.1-libssl shadow tzdata \
+      intel-media-driver libva-intel-driver ffmpeg mediainfo && \
+    useradd -u 911 -U -d /config -s /bin/false abc && \
+    usermod -G users abc && \
+    mkdir /config /output && \
+    rm -rf /var/cache/apk/* /tmp/* /tmp/.[!.]*
+
+# Copy S6-Overlay
+COPY --from=djaydev/baseimage-s6overlay:amd64 /tmp/ /
+# Copy script for Intel iGPU permissions
+COPY --from=linuxserver/plex /etc/cont-init.d/50-gid-video /etc/cont-init.d/50-gid-video
+
+# Copy the start scripts.
+COPY rootfs/ /
+
+ENV ENCODER=software \
+    SUBTITLES=1 \
+    DELETE_TS=0 \
+    PUID=99 \
+    PGID=100 \
+    UMASK=000 \
+    AUTOMATED_CONVERSION_FORMAT="mp4" \
+    NVIDIA_VISIBLE_DEVICES=all \
+    NVIDIA_DRIVER_CAPABILITIES=all
+
+ENTRYPOINT ["/init"]
